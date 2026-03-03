@@ -1,0 +1,47 @@
+<<<<<<< HEAD
+# Python Virtual Environments & Caches
+venv_stable/
+__pycache__/
+*.pyc
+
+# Node & Next.js Caches
+node_modules/
+.next/
+out/
+
+# Environment Variables
+.env
+.mdf
+
+# SDLC Agent Workspaces (Don't backup the generated code, just the system)
+env_dev/
+env_sit/
+env_prod/
+=======
+# Python Virtual Environments & Caches
+venv_stable/
+__pycache__/
+*.pyc
+
+# Node & Next.js Caches
+node_modules/
+.next/
+out/
+
+# Environment Variables
+.env
+
+
+# SDLC Agent Workspaces (Don't backup the generated code, just the system)
+env_dev/
+env_sit/
+env_prod/
+>>>>>>> 8dc8bd999ee3279497bb4636b3750709d13d7e7e
+agent_workspace/
+
+# Ignore large database and compressed files
+*.mdf
+*.ldf
+*.zip
+*.bak
+ReverseE/

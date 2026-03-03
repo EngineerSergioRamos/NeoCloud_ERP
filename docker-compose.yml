@@ -1,0 +1,21 @@
+services:
+  # The "Gold" Layer Database (Where the SaaS data lives)
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: neocloud_erp
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # The Real-Time Sync Engine (For Collab & Mobile Pushes)
+  redis:
+    image: redis:alpine
+    ports:
+      - "6339:6379"
+
+volumes:
+  postgres_data:

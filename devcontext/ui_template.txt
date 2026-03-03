@@ -1,0 +1,61 @@
+"use client";
+import React, { useState, useEffect } from 'react';
+import { Activity, HardHat, FileText, Calculator, Settings } from 'lucide-react';
+
+// AI INSTRUCTION: Use this exact layout. Do not change the Tailwind classes for the main grid.
+// Only update the data fetching logic to connect to the FASAR FastAPI backend.
+
+export default function DashboardTemplate() {
+  const [fasarData, setFasarData] = useState(null);
+
+  return (
+    <div className="min-h-screen bg-slate-50 flex">
+      {/* Sidebar */}
+      <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col shadow-2xl">
+        <div className="p-6 border-b border-slate-800">
+          <h1 className="text-2xl font-black text-white tracking-tighter">NEOCLOUD<span className="text-blue-500 font-light">ERP</span></h1>
+        </div>
+        <nav className="flex-1 p-4 space-y-2">
+          <a href="#" className="flex items-center gap-3 p-3 bg-blue-600/10 text-blue-400 rounded-xl font-bold"><Activity size={18}/> Dashboard</a>
+          <a href="#" className="flex items-center gap-3 p-3 hover:bg-slate-800 rounded-xl transition-colors"><HardHat size={18}/> Projects</a>
+          <a href="#" className="flex items-center gap-3 p-3 hover:bg-slate-800 rounded-xl transition-colors"><Calculator size={18}/> FASAR Calc</a>
+          <a href="#" className="flex items-center gap-3 p-3 hover:bg-slate-800 rounded-xl transition-colors"><FileText size={18}/> Reports</a>
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 p-8">
+        <header className="mb-8">
+          <h2 className="text-3xl font-bold text-slate-800">Project Overview</h2>
+          <p className="text-slate-500">Mexican Regulatory Labor Cost Engine (Jalisco Standard)</p>
+        </header>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Base Salary</h3>
+            <p className="text-3xl font-black text-slate-800">$0.00</p>
+          </div>
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">IMSS Quotas</h3>
+            <p className="text-3xl font-black text-blue-600">0.0%</p>
+          </div>
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 border-l-4 border-l-green-500">
+            <h3 className="text-sm font-bold text-green-500 uppercase tracking-wider mb-2">Calculated FASAR</h3>
+            <p className="text-3xl font-black text-slate-800">Waiting for API...</p>
+          </div>
+        </div>
+
+        {/* Data Table */}
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+            <div className="p-6 border-b border-slate-100">
+                <h3 className="font-bold text-slate-800">Recent Calculations</h3>
+            </div>
+            <div className="p-6 text-slate-500 italic text-sm">
+                AI INSTRUCTION: Inject the mapping logic here to display the API results.
+            </div>
+        </div>
+      </main>
+    </div>
+  );
+}

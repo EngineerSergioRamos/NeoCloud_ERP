@@ -1,0 +1,53 @@
+# NeoCloud ERP: Core Engineering Requirements (Sprint 1)
+
+## 1. Project Overview
+NeoCloud ERP is a highly specialized SaaS platform designed for construction administration and project management in Mexico (specifically targeting Jalisco standards). The cluster must build a full-stack application (FastAPI Backend + Next.js Frontend) that automates cost engineering, scheduling, and labor compliance.
+
+## 2. Agent Directives & Context Mapping
+All engineers MUST use the `read_context_file` tool to ingest the logic from the files below before writing any code. Do not guess Mexican regulations; parse the provided documents.
+
+### Module A: Labor Cost & FASAR Engine (Backend Focus)
+**Context Files to Read:**
+* `MEXICAN REGULATORY INFO - 2014 Presentación 02 PUB Ley Federal del Trabajo.ppsx`
+* `MEXICAN REGULATORY INFO - 2014 Presentación 03 PUB Ley IMSS.ppsx`
+* `LFT CALCULATION ADDITIONAL INFO - 140517 Sobrecosto - LFT.xlsx - Hoja1.csv` (and subsequent Hoja CSVs)
+**Requirements:**
+1. The Backend Engineer must create a calculation engine (e.g., `fasar_calc.py`) that strictly implements the overhead and labor cost formulas found in the LFT CSVs.
+2. It must calculate the Real Salary Factor (FASAR) utilizing the exact days, bonuses, and IMSS quotas specified in the regulatory presentations.
+3. Expose these calculations via FastAPI endpoints.
+
+### Module B: Unit Price Analysis (Análisis de Precios Unitarios)
+**Context Files to Read:**
+* `MEXICAN REGULATORY INFO - 2014 Presentación 01 Análisis de Precios Unitarios.ppsx`
+* `EXTRA KNOWLEDGE - DIAPOSITIVAS PRECIOS.pptx`
+* `COURSE - Admon de Obras, ICIC jalisco, Feb 2016.pdf`
+**Requirements:**
+1. Create data models and endpoints for Catalogs, Materials, Labor, and Equipment.
+2. The logic must reflect the ICIC Jalisco methodologies for indirect costs, financing, and utility margins.
+
+### Module C: Project Scheduling & Critical Path
+**Context Files to Read:**
+* `MEXICAN REGULATORY INFO - 2014 Presentación 04 PUB Ruta Crítica.ppsx`
+**Requirements:**
+1. Implement a Critical Path Method (CPM) algorithm in the backend to calculate early/late starts and float times.
+2. The Frontend Engineer must create a Gantt-chart or timeline UI component in React/Next.js to visualize this data.
+
+### Module D: SaaS Architecture & UI/UX Best Practices
+**Context Files to Read:**
+* `ui_template.txt`
+**Requirements:**
+1. The Frontend Architect MUST read `ui_template.txt`. 
+2. You are strictly forbidden from inventing your own UI layout.
+3. You must use the exact code found in `ui_template.txt` as your foundation. 
+4. Your only job is to wire up the `fetch` logic inside the template so it connects to the `fasar_calc.py` backend endpoints, and save the result as `Dashboard.tsx`.
+### Module E: QA & Integration Testing
+**Context Files to Read:**
+* `TEST CASE - Ejemplo de Aplicación práctica del PMBOK caso practico.pdf`
+**Requirements:**
+1. The QA Lead must use this PMBOK practical case as the baseline for integration testing.
+2. Write Python `pytest` scripts to simulate the inputs from this PDF and assert that the outputs of the new FastAPI engine match the PMBOK case study results.
+
+## 3. Execution Rules
+* **Backend**: Write clean, typed Python using SOLID principles. Save to `agent_workspace/api_core.py`.
+* **Frontend**: Write functional React components using hooks. Save to `agent_workspace/Dashboard.tsx`.
+* **QA**: Ensure all code aligns with the Mexican regulatory context provided. Use the `send_pr_to_dashboard` tool to present the final review to the Engineering Director.
