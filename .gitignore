@@ -45,3 +45,9 @@ agent_workspace/
 *.zip
 *.bak
 ReverseE/
+
+# Environment & Temp Files
+.env
+.DS_Store
+backend/env_dev/
+backend/env_sit/

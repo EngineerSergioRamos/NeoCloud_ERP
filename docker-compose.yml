@@ -1,21 +1,23 @@
+version: '3.8'
+
 services:
-  # The "Gold" Layer Database (Where the SaaS data lives)
-  postgres:
-    image: postgres:16
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: neocloud_erp
+      - NEXT_PUBLIC_API_URL=http://localhost:8001
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
     ports:
-      - "5432:5432"
+      - "8000:8000" # AI Orchestrator API
+      - "8001:8001" # Live FastAPI
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-  # The Real-Time Sync Engine (For Collab & Mobile Pushes)
-  redis:
-    image: redis:alpine
-    ports:
-      - "6339:6379"
-
-volumes:
-  postgres_data:
+      # This is crucial: It saves your SQLite DBs to the server's hard drive 
+      # so if the container reboots, your Neodata matrices aren't deleted!
+      - ./backend/env_prod:/app/env_prod
+    restart: unless-stopped
